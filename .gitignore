@@ -1,6 +1,5 @@
 .alpackages/
 .vscode/
-Layouts/
 !Report Pack/Layouts/
 *.app
 Translations/
