@@ -4,6 +4,7 @@ codeunit 50100 "Print Return Label"
     local procedure MyProcedure(var SalesHeader: Record "Sales Header")
     var
         Rec: Record "Sales Header";
+        RecRef: RecordRef;
     begin
         with Rec do begin
             Rec := SalesHeader;
@@ -11,7 +12,10 @@ codeunit 50100 "Print Return Label"
                 exit;
 
             Rec.SetRecFilter;
-            Report.Run(Report::"Sales Return Label", true, false, Rec);
+
+            RecRef.Open(Database::"Sales Header");
+            RecRef.SetView(Rec.GetView);
+            Report.Print(Report::"Return Label - Direct Print", '', 'Brother QL-800', RecRef);
         end;
     end;
 }
